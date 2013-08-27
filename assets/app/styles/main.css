@@ -1,0 +1,96 @@
+/* Will be compiled down to a single stylesheet with your sass files */
+div.content-title{
+
+			margin: 10px 0 40px -15px;
+			height: 60px;
+			width: 100%;
+		}
+		div.content-title h2{
+			
+			font-size: 2em;
+			margin-bottom: 4px;
+		}
+		.nav-search .ui-btn-up-a {
+		    background-image:none;
+		    background-color:#333333;
+		}
+		/*.nav-search .ui-btn-inner {
+		    border-top: 1px solid #888;
+		    border-color: rgba(255, 255, 255, .1);
+		}*/
+
+		
+		.nav-search .ui-btn.ui-first-child {
+		    border-top-width: 0;
+		    background: #111;
+		}
+		a#main-menu-btn.main-menu{
+			padding-left: 10px;
+			left: 10px;
+			border: none;
+			border-color: transparent;
+		}
+		a#main-menu-btn.main-menu .ui-btn-inner{
+			border-color: transparent;
+		}
+		.ui-btn.ui-btn-icon-notext.ui-btn-up-a.main-menu{
+			top:-2px;
+			left: 0;
+			height: 100%;
+			width: 31px;
+			background-image:url(../images/jqm-menu-icons-sd.png);
+			background-repeat:no-repeat;
+			background-size: auto;
+			background-position:-3px;
+			background-color: transparent;
+			margin: 2px;
+			border-style: none;
+			text-align: left;
+		}
+		.ui-btn.ui-btn-icon-notext.ui-btn-hover-a.main-menu{
+			top:-2px;
+			left: 0;
+			height: 100%;
+			width: 31px;
+			background-image:url(../images/jqm-menu-icons-sd.png);
+			background-repeat:no-repeat;
+			background-size:auto;
+			background-position: -3px;
+			background-color: transparent;
+			margin: 2px;
+			border-style: none;
+			text-align: left;
+		}
+
+		.notepad-body {
+		 /*background-color: #f5f5f5;*/
+		 max-width: 600px;
+		 margin-bottom: 30px;
+		 /*padding: 20px;*/
+		}
+		.list {
+		  display: inline-block;
+		  color: #555;
+		  font-size: 22px;
+		  width: 500px;
+		  font-family: courier, monospace;
+		  border: 1px solid #dedede;
+		}
+		.list li {
+		  list-style: none;
+		  border-bottom: 1px dotted #ccc;
+		  text-indent: 25px;
+		  height: auto;
+		  padding: 10px;
+		  text-transform: capitalize;
+		}
+		textarea.list {
+		 /*background: url(../images/renglon.png) repeat-y;*/
+		 max-width: 566px;
+		 height: 100%;
+		 font: normal 14px verdana;
+		 font-family: courier, monospace;
+		 line-height: 25px;
+		 padding: 2px 10px;
+		 border: solid 1px #ddd;
+		}

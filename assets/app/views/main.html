@@ -1,0 +1,76 @@
+<div id="main-page" data-role="page" class="ui-responsive-panel" ng-controller="MainCtrl">
+	<div data-role="panel" id="leftpanel">
+		<ul data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+			<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+			<li><a href="#main-page">Ver Agenda</a></li>
+			<li data-role="list-divider">Expedientes</li>
+				<li><a href="#expediente-page">Nuevo</a></li>
+				<li><a href="">Listado</a></li>
+			<li data-role="list-divider">Movimientos</li>
+				<li><a href="#movimiento-page">Nueva Tarea</a></li>
+				<li><a href="">Buscar</a></li>
+			<li data-role="list-divider">Estudio</li>
+				<li><a href="">Usuario</a></li>
+				<li><a href="">Reporte Diario</a></li>
+			<li data-role="list-divider">Extras</li>
+			<li><a href="">Sincronizar Con Estudio</a></li>
+			<li><a href="">Exportar</a></li>
+		</ul>
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed" data-tap-toggle="false">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Agenda</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Tareas</h2>
+			<p class="ui-li-desc">{{hoy()}}</p>
+		</div>
+		<form id="expediente-form">
+			<ul data-role="listview" data-inset="true" data-divider-theme="a" class="notepad-body">
+				<li data-role="list-divider">Notas</li>
+				<li>
+					<textarea id="notes" class="list" rows="4"></textarea>
+				</li>
+			</ul>
+			
+			<ul data-role="listview" data-inset="true" data-divider-theme="a">
+				<li data-role="list-divider">Tareas</li>
+				<li>
+					<fieldset data-role="controlgroup">
+						<label for="check-1">
+						<a class="ui-li-heading" href="">Tarea 1</a>
+						<p class="ui-li-desc">Descripción de Tarea 1</p>
+						</label>
+						<input type="checkbox" id="check-1" data-iconpos="right">
+					
+						<label for="check-2">
+							<a class="ui-li-heading" href="">Tarea 2</a>
+							<p class="ui-li-desc">Descripción de Tarea 2</p>
+						</label>
+						<input type="checkbox" id="check-2" data-iconpos="right">
+					
+						<label for="check-3">
+							<a class="ui-li-heading" href="">Tarea 3</a>
+							<p class="ui-li-desc">Descripción de Tarea 3</p>
+						</label>
+						<input type="checkbox" id="check-3" data-iconpos="right">
+					
+						<label for="check-4">
+							<a class="ui-li-heading" href="">Tarea 4</a>
+							<p class="ui-li-desc">Descripción de Tarea 4</p>
+						</label>
+						<input type="checkbox" id="check-4" data-iconpos="right">
+					</fieldset>
+				</li>
+			</ul>
+		</form>
+	</div><!-- /content -->
+
+	<!-- <div data-role="footer" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div> --><!-- /footer -->
+</div><!-- /page -->

@@ -1,0 +1,373 @@
+<!doctype html>
+<html ng-app >
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="components/jquery/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="styles/main.css">
+    
+	<script src="components/angular/angular.js"></script>
+    <script src="components/jquery/jquery-1.9.1.min.js"></script>
+	<script src="components/jquery/jquery.mobile-1.3.1.min.js"></script>
+    <script src="scripts/vendor/cordova-2.6.0.js"></script>
+    
+    
+    <!-- <script src="components/jquery-mobile-angular-adapter/compiled/jquery-mobile-angular-adapter.js"></script> -->
+
+    <!-- build:js scripts/scripts.js -->
+    <!-- <script src="scripts/app.js"></script> -->
+    
+    <script src="scripts/controllers/main.js"></script>
+  </head>
+  
+  <body ng-controller="MainCtrl" >
+	
+	<div id="main-page" data-role="page" class="ui-responsive-panel" >
+	<div data-role="panel" id="leftpanel">
+		<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listvi">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage" ng-click="getExpedientes()">Listado</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed" data-tap-toggle="false">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button" onclick="showPopup();">Guardar</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Tareas</h2>
+			<p class="ui-li-desc">{{hoy()}}</p>
+		</div>
+		<form id="expediente-form">
+			<ul data-role="listview" data-inset="true" data-divider-theme="a" class="notepad-body">
+				<li data-role="list-divider">Notas</li>
+				<li>
+					<textarea id="notes" class="list" rows="4"></textarea>
+				</li>
+			</ul>
+			
+			<ul data-role="listview" data-inset="true" data-divider-theme="a">
+				<li data-role="list-divider">Tareas</li>
+				<li>
+					<fieldset data-role="controlgroup" ng-repeat="tarea in tareas">
+							<label for="check-{{$index + 1}}" >
+							<a class="ui-li-heading" style="white-space: normal;" href="">{{tarea.juzgado}} <br> "{{tarea.actor}} c/ {{tarea.demandado}} s/ {{tarea.accion}}"</a>
+							<p class="ui-li-desc" style="white-space: normal;">{{tarea.movimiento}}</p>
+							</label>
+							<input type="checkbox" id="check-{{$index + 1}}" data-iconpos="right" ng-checked="tarea.hecho">
+					</fieldset>
+				</li>
+			</ul>
+		</form>
+	</div><!-- /content -->
+</div><!-- /page -->
+	
+   <div id="expediente-page" data-role="page" class="ui-responsive-panel" >
+	<div data-role="panel" id="leftpanel">	
+		<ul data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+				<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+				<li><a href="#main-page">Tareas para hoy</a></li>
+				<li><a href="#main-page">Ver Agenda</a></li>
+				<li data-role="list-divider">Expedientes</li>
+					<li><a href="#expediente-page">Nuevo</a></li>
+					<li><a href="#expediente-listpage" ng-click="getExpedientes()">Listado</a></li>
+				<li data-role="list-divider">Movimientos</li>
+					<li><a href="#movimiento-page" ng-click="newMovimiento(currentExp)">Nueva Tarea</a></li>
+					<li><a href="#movimiento-listpage" ng-click="MovimientosLst(currentExp.expno)">Buscar</a></li>
+				<li data-role="list-divider">Estudio</li>
+					<li><a href="#user-page">Usuario</a></li>
+					<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+					<li><a href="#report-page">Reporte Diario</a></li>
+				<li data-role="list-divider">Extras</li>
+				<li><a href="">Sincronizar Con Estudio</a></li>
+				<li><a href="">Exportar</a></li>
+		</ul>	
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button" ng-click="saveExpediente(currentExp);">Guardar</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Expediente</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider"> Formulario </li>
+			<li>
+				<form id="expediente-form">
+					<div style="height:20px;"></div>
+					<label for="expno">Nº de Expediente</label>
+					<input type="text" placeholder="Nº de Expediente" name="expno" id="expno" ng-model="currentExp.expno" pattern="[0-9]+[/][0-9]{4}">
+					<label for="expCaratula">Carátula</label>
+					<input type="text" placeholder="Carátula" name="expCaratula" id="expCaratula" ng-model="currentExp.expCaratula">
+					<label for="expJuzgado">Juzgado</label>
+					<input type="text" placeholder="Juzgado" name="expJuzgado" id="expJuzgado" ng-model="currentExp.expJuzgado">
+					<label for="expRepresentantes">Representantes</label>
+					<input type="text" placeholder="Representantes" name="expRepresentantes" id="expRepresentantes" ng-model="currentExp.expRepresentantes">
+				</form>
+			</li>
+		</ul>
+	</div><!-- /content -->
+</div><!-- /page -->
+<div id="expediente-listpage" data-role="page" >
+	<div data-role="panel" id="leftpanel">
+	<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage" ng-click="getExpedientes()">Listado</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>		
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Actualizar</a>
+	</div><!-- /header -->
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Expedientes</h2>
+			<p class="ui-li-desc">Listado</p>
+		</div>
+		<!-- listado de Expedientes -->
+		<ul id="exp-listview" data-role="listview" data-filter="true" data-filter-placeholder="Buscar Expediente..." data-inset="true" >
+		    <li ng-repeat="exp in expedientesLst">
+		    	<a href="#expediente-page" ng-click="getExp(exp.expno)">
+		    		<h2 class="ui-li-heading"># {{exp.expno}} - {{exp.expCaratula}} </h2>
+					<p class="ui-li-desc">Juzgado: {{exp.expJuzgado}}, Representantes: {{exp.expRepresentantes}}</p>
+				</a>
+		    </li>
+		</ul>
+	</div>
+</div>
+<div id="movimiento-page" data-role="page" class="ui-responsive-panel" >
+	<div data-role="panel" id="leftpanel">
+	<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage" ng-click="getExpedientes()">Listado</a></li>
+					<li data-role="list-divider">Movimientos</li>
+						<li><a href="#movimiento-listpage" ng-click="MovimientosLst(currentExp.expno)">Buscar</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>		
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button" ng-click="saveMovimiento(currentMov)">Guardar</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Movimiento</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider"> Formulario </li>
+			<li>
+				<form id="movimiento-form">
+				<label for="expno">Nº de Expediente</label>
+				<input type="number" placeholder="Nº de Expediente Asociado" name="expno" id="expno" ng-model="currentExp.expno" readonly>
+				<label for="movNum">Nº de Movimiento</label>
+				<input type="number" placeholder="Nº de Expediente Asociado" name="movNum" id="movNum" ng-model="currentMov.movNum" readonly>
+				<label for="movjuzgado">Juzgado</label>
+				<input type="text" placeholder="Juzgado" name="movjuzgado" id="movjuzgado" ng-model="currentExp.expJuzgado" readonly>
+				<label for="movDescripcion">Descripción</label>
+				<input type="text" placeholder="Descripción" name="movDescripción" id="movDescripción" ng-model="currentMov.movDescripción">
+				<label for="fecha">Fecha</label>
+				<input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" ng-model="currentMov.movFecha">
+				<label for="caratula">Carátula Expediente</label>
+				<input type="text" placeholder="Carátula Expediente" name="caratula" id="caratula" ng-model="currentMov.movCaratula">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="flip-1" style="margin-top:12px;">Obligatoria/Audiencia</label>
+					</div>
+					<div class="ui-block-b">
+						<select name="flip-1" id="flip-1" data-role="slider" data-track-theme="a" ng-model="currentMov.movAudiencia">
+						<option value="off">No</option>
+						<option value="on">Si</option>
+					    </select>
+					</div>
+				</div>
+				
+				<label for="representantes">Representantes</label>
+				<input type="text" placeholder="Representantes" name="representantes" id="representantes" ng-model="currentMov.movRepresentantes">
+		</form>
+			</li>
+		</ul>
+	</div><!-- /content -->
+</div><!-- /page -->
+<div id="movimiento-listpage" data-role="page" >
+	<div data-role="panel" id="leftpanel">
+	<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage">Listado</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>		
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Guardar</a>
+	</div><!-- /header -->
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Movimientos</h2>
+			<p class="ui-li-desc">Listado</p>
+		</div>
+		<!-- listado de Movimientos -->
+		<ul id="mov-listview" data-role="listview" data-filter="true" data-filter-placeholder="Buscar Abogado..." data-inset="true" >
+		    <li ng-repeat="mov in movimientosLst">
+		    <a href="#movimiento-page" ng-click="getMov(mov.movNum)">
+		    	<h2 class="ui-li-heading">Numero: {{mov.movNum}} - Fecha: {{mov.movFecha}}</h2>
+				<p class="ui-li-desc"> {{mov.movDescripcion}} </p>
+			</a>
+		    </li>
+		</ul>
+	</div>
+</div><!-- /page -->
+<div id="user-page" data-role="page" >
+	<div data-role="panel" id="leftpanel">
+	<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage">Listado</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>		
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Guardar</a>
+	</div><!-- /header -->
+	<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Usuarios</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<!-- listado de Abogados -->
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar Abogado..." data-inset="true" >
+		    <li ng-repeat="usuario in abogadosLst">
+		    	<h2 class="ui-li-heading">{{usuario.nombre}} {{usuario.apellido}}</h2>
+				<p class="ui-li-desc">{{usuario.descripcion}}</p>
+		    </li>
+		</ul>
+	</div>
+</div>
+<!--<div id="juzgados-page" data-role="page" >
+	<div data-role="panel" id="leftpanel">
+	<ul id="clarkPanel" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+					<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+					<li><a href="#main-page">Tareas para hoy</a></li>
+					<li><a href="#main-page">Ver Agenda</a></li>
+					<li data-role="list-divider">Expedientes</li>
+						<li><a href="#expediente-page">Nuevo</a></li>
+						<li><a href="#expediente-listpage">Listado</a></li>
+					<li data-role="list-divider">Estudio</li>
+						<li><a href="#user-page">Usuario</a></li>-->
+						<!--<li><a href="#juzgados-page">Juzgados</a></li>-->
+						<!--<li><a href="#report-page">Reporte Diario</a></li>
+					<li data-role="list-divider">Extras</li>
+					<li><a href="">Sincronizar Con Estudio</a></li>
+					<li><a href="">Exportar</a></li>
+				</ul>		
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Guardar</a>
+	</div>--><!-- /header -->
+	<!--<div data-role="content" >
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Juzgados</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider"> Formulario </li>
+			<li>
+				<form id="juzgados-form">
+				<label for="juzgado_id">Nº de Juzgado</label>
+				<input type="text" placeholder="Identificación del Juzgado" name="juzgado_id" id="juzgado_id">
+				<label for="juzgado_name">Nombre del Juzgado</label>
+				<input type="text" placeholder="Nombre" name="juzgado_name" id="juzgado_name">
+				<label for="juzgado_addr">Domicilio</label>
+				<input type="text" placeholder="Dirección" name="juzgado_addr" id="juzgado_addr">
+		</form>
+			</li>
+		</ul>
+	</div>-->
+</div>
+
+	<script type="text/javascript">
+	$('div[data-role="page"]').on('pageload',function(){
+    // code to execute on each page change
+    $('#leftPanel').trigger( "updatelayout" );
+	});
+		
+	
+	</script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<div data-role="page" class="ui-responsive-panel" ngm-shared-controller="main:MainCtrl">
+	<div data-role="panel" id="leftpanel">
+		<ul data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+			<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+			<li><a href="">Ver Agenda</a></li>
+			<li data-role="list-divider">Expedientes</li>
+				<li><a href="">Nuevo</a></li>
+				<li><a href="">Listado</a></li>
+			<li data-role="list-divider">Movimientos</li>
+				<li><a href="">Nueva Tarea</a></li>
+				<li><a href="">Buscar</a></li>
+			<li data-role="list-divider">Estudio</li>
+				<li><a href="">Usuario</a></li>
+				<li><a href="">Reporte Diario</a></li>
+			<li data-role="list-divider">Extras</li>
+			<li><a href="">Sincronizar Con Estudio</a></li>
+			<li><a href="">Exportar</a></li>
+		</ul>
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Agenda</a>
+	</div><!-- /header -->
+	<div data-role="content">
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Expediente</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<div id="calendario"></div>
+	</div><!-- /content -->
+
+	<!-- <div data-role="footer" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div> --><!-- /footer -->
+</div><!-- /page -->

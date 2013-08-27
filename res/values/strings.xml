@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clark-NG</string>
+    <string name="local_service_started">Local Service Started</string>
+    <string name="service_name">Clark Calendar Service</string>
+</resources>

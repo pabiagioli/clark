@@ -1,0 +1,66 @@
+<div id="movimiento-page" data-role="page" class="ui-responsive-panel" ngm-shared-controller="main:MainCtrl">
+	<div data-role="panel" id="leftpanel">
+		<ul data-role="listview" data-inset="false" data-theme="a" data-divider-theme="d" class="nav-search ui-listview">
+			<li data-icon="delete"><a href="#main-header" data-rel="close">Menú Principal</a></li>
+			<li><a href="#main-page">Ver Agenda</a></li>
+			<li data-role="list-divider">Expedientes</li>
+				<li><a href="/expediente">Nuevo</a></li>
+				<li><a href="">Listado</a></li>
+			<li data-role="list-divider">Movimientos</li>
+				<li><a href="/movimiento">Nueva Tarea</a></li>
+				<li><a href="">Buscar</a></li>
+			<li data-role="list-divider">Estudio</li>
+				<li><a href="">Usuario</a></li>
+				<li><a href="">Reporte Diario</a></li>
+			<li data-role="list-divider">Extras</li>
+			<li><a href="">Sincronizar Con Estudio</a></li>
+			<li><a href="">Exportar</a></li>
+		</ul>
+	</div>
+	<div id="main-header" class="main-header" data-role="header" role="banner" data-position="fixed">
+		<a id="main-menu-btn" href="#leftpanel" data-role="button" data-corners="false" data-iconpos="notext" title="menu" class="main-menu">
+		</a>
+		<h1>Clark</h1>
+		<a href="#" data-role="button">Agenda</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+		<div class="ui-bar content-title ui-bar-c" role="banner" id="title">
+			<h2 class="ui-li-heading">Movimiento</h2>
+			<p class="ui-li-desc">Formulario Nuevo</p>
+		</div>
+		<ul data-role="listview" data-inset="true" data-divider-theme="a">
+			<li data-role="list-divider"> Formulario </li>
+			<li>
+				<form id="expediente-form">
+				<label for="expno">Nº de Expediente</label>
+				<input type="number" placeholder="Nº de Expediente Asociado" name="expno" id="expno">
+				<label for="juzgado">Juzgado</label>
+				<input type="text" placeholder="Juzgado" name="juzgado" id="juzgado">
+				<label for="fecha">Fecha</label>
+				<input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha">
+				<label for="caratula">Carátula Expediente</label>
+				<input type="text" placeholder="Carátula Expediente" name="caratula" id="caratula">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="flip-1" style="margin-top:12px;">Obligatoria/Audiencia</label>
+					</div>
+					<div class="ui-block-b">
+						<select name="flip-1" id="flip-1" data-role="slider">
+					        <option value="off">Off</option>
+					        <option value="on">On</option>
+					    </select>
+					</div>
+				</div>
+				
+				<label for="representantes">Representantes</label>
+				<input type="text" placeholder="Representantes" name="representantes" id="representantes">
+		</form>
+			</li>
+		</ul>
+	</div><!-- /content -->
+
+	<!-- <div data-role="footer" data-position="fixed">
+		<h4>Page Footer</h4>
+	</div> --><!-- /footer -->
+</div><!-- /page -->
