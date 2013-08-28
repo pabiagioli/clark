@@ -15,9 +15,6 @@ public class Movimiento {
 	private Expediente expediente;
 	@Expose
 	@DatabaseField
-	private String movCaratula;
-	@Expose
-	@DatabaseField
 	private Date movFecha;
 	@Expose
 	@DatabaseField
@@ -58,14 +55,6 @@ public class Movimiento {
 
 	public void setExpediente(Expediente expediente) {
 		this.expediente = expediente;
-	}
-
-	public String getMovCaratula() {
-		return movCaratula;
-	}
-
-	public void setMovCaratula(String movCaratula) {
-		this.movCaratula = movCaratula;
 	}
 
 	public Date getMovFecha() {

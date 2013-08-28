@@ -46,7 +46,7 @@ $scope.saveExpediente = function(expObj){
 	};
 
 $scope.saveMovimiento = function(movObj){
-		console.log("currentMov = "+ JSON.stringify(movObj));
+
 		
 		if($scope.currentMov.movAudiencia == 'si')
 			$scope.currentMov.movAudiencia = true;
@@ -132,12 +132,12 @@ $scope.saveMovimiento = function(movObj){
 	}
 	
 	$scope.newMovimiento = function(expObj){
-		$scope.currentMov = JSON.parse('{ "movNum":"" ,"movCaratula":null,"movDescripcion":null,"movFecha":null,"movAudiencia":"on","movActor":null,"movDemandado":null,"movAccion:null,"movRepresentantes":null}');
-		console.log("currentMov = " + JSON.stringify($scope.currentMov));
+		$scope.currentMov = JSON.parse('{ "movNum":"" ,"movDescripcion":"","movFecha":"","movAudiencia":"on","movActor":"","movDemandado":"","movAccion":"","movRepresentantes":""}');
+		//console.log("currentMov = " + JSON.stringify($scope.currentMov));
 		//console.log("calling generateMovId: " + (window.JSMovimientos.generateMovId()).toString());
 		
 		$scope.currentMov.movNum = parseInt((window.JSMovimientos.generateMovId()).toString());
-		console.log("currentMov.movNum = "+ $scope.currentMov.movNum);
+		//console.log("currentMov.movNum = "+ $scope.currentMov.movNum, "currentExp : "+ JSON.stringify($scope.currentExp));
 		
 	};
 

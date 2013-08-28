@@ -199,8 +199,8 @@ public class ClarkActivity extends DroidGap
     	        .setData(Events.CONTENT_URI)
     	        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
     	        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-    	        .putExtra(Events.TITLE, "[Clark] "+ mov.getExpediente().getExpJuzgado() + " " + mov.getExpediente().getExpno() + " " + mov.getMovCaratula())
-    		        .putExtra(Events.DESCRIPTION, "[Clark] Caratula: "+mov.getMovCaratula() + 
+    	        .putExtra(Events.TITLE, "[Clark] "+ mov.getExpediente().getExpJuzgado() + " " + mov.getExpediente().getExpno() + " " + mov.getExpediente().getExpCaratula())
+    		        .putExtra(Events.DESCRIPTION, "[Clark] Caratula: "+mov.getExpediente().getExpCaratula() + 
     		        		" Expediente Nro: "+ mov.getExpediente().getExpno() +
     		        		"Descripción "+ mov.getMovDescripcion() +
     		        		" Audiencia: "+ mov.getMovAudiencia().toString())
@@ -216,7 +216,7 @@ public class ClarkActivity extends DroidGap
     	        intent.putExtra("allDay", true);
     	        intent.putExtra("rrule", "FREQ=YEARLY");
     	        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-    	        intent.putExtra("title", "[Clark] Caratula: "+mov.getMovCaratula());
+    	        intent.putExtra("title", "[Clark] Caratula: "+mov.getExpediente().getExpCaratula());
     	        startActivity(intent);
     	        }
     		

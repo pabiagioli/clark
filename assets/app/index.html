@@ -207,18 +207,18 @@
 			<li data-role="list-divider"> Formulario </li>
 			<li>
 				<form id="movimiento-form">
-				<label for="expno">Nº de Expediente</label>
-				<input type="number" placeholder="Nº de Expediente Asociado" name="expno" id="expno" ng-model="currentExp.expno" readonly>
+				<label for="expno2">Nº de Expediente</label>
+				<input type="text" placeholder="Nº de Expediente Asociado" name="expno2" id="expno2" ng-model="currentExp.expno" readonly>
 				<label for="movNum">Nº de Movimiento</label>
 				<input type="number" placeholder="Nº de Expediente Asociado" name="movNum" id="movNum" ng-model="currentMov.movNum" readonly>
 				<label for="movjuzgado">Juzgado</label>
 				<input type="text" placeholder="Juzgado" name="movjuzgado" id="movjuzgado" ng-model="currentExp.expJuzgado" readonly>
+				<label for="movCaratula">Carátula Expediente</label>
+				<input type="text" placeholder="Carátula Expediente" name="movCaratula" id="movCaratula" ng-model="currentExp.expCaratula" readonly>
 				<label for="movDescripcion">Descripción</label>
-				<input type="text" placeholder="Descripción" name="movDescripción" id="movDescripción" ng-model="currentMov.movDescripción">
-				<label for="fecha">Fecha</label>
-				<input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" ng-model="currentMov.movFecha">
-				<label for="caratula">Carátula Expediente</label>
-				<input type="text" placeholder="Carátula Expediente" name="caratula" id="caratula" ng-model="currentMov.movCaratula">
+				<input type="text" placeholder="Descripción" name="movDescripcion" id="movDescripcion" ng-model="currentMov.movDescripcion">
+				<label for="movFecha">Fecha</label>
+				<input type="text" placeholder="dd/mm/aaaa" name="movFecha" id="movFecha" ng-model="currentMov.movFecha">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="flip-1" style="margin-top:12px;">Obligatoria/Audiencia</label>
@@ -230,7 +230,7 @@
 					    </select>
 					</div>
 				</div>
-				<label for="caratula">Actor</label>
+				<label for="movActor">Actor</label>
 				<input type="text" placeholder="Actor" name="movActor" id="movActor" ng-model="currentMov.movActor">
 				<label for="movDemandado">Demandado</label>
 				<input type="text" placeholder="Demandado" name="movDemandado" id="movDemandado" ng-model="currentMov.movDemandado">
