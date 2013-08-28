@@ -132,7 +132,7 @@ $scope.saveMovimiento = function(movObj){
 	}
 	
 	$scope.newMovimiento = function(expObj){
-		$scope.currentMov = JSON.parse('{ "movNum":"" ,"movCaratula":null,"movDescripcion":null,"movFecha":null,"movAudiencia":"on","movRepresentantes":null}');
+		$scope.currentMov = JSON.parse('{ "movNum":"" ,"movCaratula":null,"movDescripcion":null,"movFecha":null,"movAudiencia":"on","movActor":null,"movDemandado":null,"movAccion:null,"movRepresentantes":null}');
 		console.log("currentMov = " + JSON.stringify($scope.currentMov));
 		//console.log("calling generateMovId: " + (window.JSMovimientos.generateMovId()).toString());
 		
